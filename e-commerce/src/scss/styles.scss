@@ -3,6 +3,7 @@
 
 $search-bar-color: #F6F6F6;
 $sign-up-btn-color: #FF3F3F;
+$inicial-section-color: #F2F2F2;
 
 
 *{
@@ -19,7 +20,9 @@ $sign-up-btn-color: #FF3F3F;
     display: flex;
     position: fixed;
     justify-content: space-between;
+    background-color: white;
     align-items: center;
+    z-index: 100;
     border-bottom: 1px solid rgb(122, 122, 122);
 
     .book-icon{
@@ -62,6 +65,74 @@ $sign-up-btn-color: #FF3F3F;
             background-color: $sign-up-btn-color;
             font-size: 16px;
             margin-left: 15px;
+        }
+    }
+    
+}
+
+#inicial-section{
+    display: flex;
+    flex-direction: column;
+    height: 2000px;
+    align-items: center;
+    padding-top: 50px;
+    background-color: $inicial-section-color;
+
+    .book{
+        width: 80px;
+    }
+
+    .book-departments{
+        display: flex;
+        width: 95vw;
+        margin-top: 50px;
+        justify-content: space-around;
+
+        .book-department{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            width: 190px;
+            height: 190px;
+            .department-name{
+                font-size: 24px;
+                margin-top: 20px;
+            }
+        }
+    }
+    .department-top-sellers{
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 85vw;
+        padding: 0 5vw;
+        height: 250px;
+        margin-top: 50px;
+        background-color: white;
+        .title{
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+        .department-books{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            .book-info{
+                width: 100px;
+                height: 100px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .book-name{
+                    text-align: center;
+                    font-size: 13px;
+                    margin-top: 5px;
+                }
+            }
         }
     }
     
