@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+
+$search-bar-color: #F6F6F6;
+$sign-up-btn-color: #FF3F3F;
+
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+#header{
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(122, 122, 122);
+
+    .book-icon{
+        width: 32px;
+        margin-left: 50px;
+    }
+    .search{
+        position: relative;
+
+        .search-bar{
+            width: 490px;
+            height: 35px;
+            border-radius: 50px;
+            border: none;
+            background-color: $search-bar-color;
+            padding-left: 20px;
+            &::placeholder{
+                font-size: 17px;
+            }
+        }
+        .search-btn{
+            width: 20px;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .btns{
+        margin-right: 50px;
+        .sign-in-link{
+            text-decoration: none;
+            color: black;
+        }
+        .sign-up-btn{
+            width: 100px;
+            height: 30px;
+            border-radius: 50px;
+            border: none;
+            background-color: $sign-up-btn-color;
+            font-size: 16px;
+            margin-left: 15px;
+        }
+    }
+    
+}
