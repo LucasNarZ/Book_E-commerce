@@ -51,6 +51,39 @@ function InicialPage(props){
             </div>
             
             <div className="department-top-sellers">
+                <h1 className='title'>Top Sellers in Self-Help</h1>
+                <div className="department-books">
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>How to Win Friends and Influence People</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The 7 Habits of Highly Effective People</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Think and Grow Rich</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The Power of Positive Thinking</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Awaken the Giant Within</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The Alchemist</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The Four Agreements</p>
+                    </div>
+                </div>
+            </div>
+            <div className="department-top-sellers">
                 <h1 className='title'>Top Sellers in fantasy</h1>
                 <div className="department-books">
                     <div className="book-info">
@@ -80,6 +113,40 @@ function InicialPage(props){
                     <div className="book-info">
                         <img src={iconImage} alt="book" className='book'/>
                         <p className='book-name'>The Dark Tower</p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="department-top-sellers">
+                <h1 className='title'>Top Sellers in Sci Fi</h1>
+                <div className="department-books">
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>1984</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Brave New World</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Dune</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The Hitchhiker's Guide to the Galaxy</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Ender's Game</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>The War of the Worlds</p>
+                    </div>
+                    <div className="book-info">
+                        <img src={iconImage} alt="book" className='book'/>
+                        <p className='book-name'>Fahrenheit 451</p>
                     </div>
                 </div>
             </div>
