@@ -3,6 +3,8 @@ import iconSearch from './icons/icon_search_.svg'
 import iconImage from './icons/icon_image.svg'
 
 import React from 'react';
+import axios from 'axios';
+import {useState, useEffect} from 'react';
 
 import './css/styles.css';
 
@@ -24,7 +26,25 @@ function Header(props){
     )
 }
 
+
+
+
 function InicialPage(props){
+    const [selfHelpBooks, setSelfHelpBooks] = useState();
+    useEffect(() => {
+        async function getBooks(){
+            try{
+                const books = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:economics&printType:books&maxResults=7&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
+                setSelfHelpBooks(books.data.items);
+            }catch(error){
+                console.error(error)
+                alert('Failed to fetch self-help books!');
+            }
+            
+        }
+        getBooks();
+    }, [])
+    
     return(
         <section id='inicial-section'>
             <div className="book-departments">
@@ -53,101 +73,33 @@ function InicialPage(props){
             <div className="department-top-sellers">
                 <h1 className='title'>Top Sellers in Self-Help</h1>
                 <div className="department-books">
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>How to Win Friends and Influence People</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The 7 Habits of Highly Effective People</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Think and Grow Rich</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Power of Positive Thinking</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Awaken the Giant Within</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Alchemist</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Four Agreements</p>
-                    </div>
+                    {selfHelpBooks &&
+                    selfHelpBooks.map(book => {
+                        return(
+                            <div className="book-info">
+                                <img src={book.volumeInfo.imageLinks.thumbnail} className='book'/>
+                                <p className='book-name'>{book.volumeInfo.title}</p>
+                            </div>
+                        )
+                    })}
+                    
+                    
                 </div>
             </div>
             <div className="department-top-sellers">
-                <h1 className='title'>Top Sellers in fantasy</h1>
+                <h1 className='title'>Top Sellers in Self-Help</h1>
                 <div className="department-books">
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Hobbit</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Game of Thrones</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Lord of the Rings</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Harry Potter</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Percy Jackson</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Name of the Wind</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Dark Tower</p>
-                    </div>
-                </div>
-            </div>
-
-            <div className="department-top-sellers">
-                <h1 className='title'>Top Sellers in Sci Fi</h1>
-                <div className="department-books">
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>1984</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Brave New World</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Dune</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The Hitchhiker's Guide to the Galaxy</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Ender's Game</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>The War of the Worlds</p>
-                    </div>
-                    <div className="book-info">
-                        <img src={iconImage} alt="book" className='book'/>
-                        <p className='book-name'>Fahrenheit 451</p>
-                    </div>
+                    {selfHelpBooks &&
+                    selfHelpBooks.map(book => {
+                        return(
+                            <div className="book-info">
+                                <img src={book.volumeInfo.imageLinks.thumbnail} className='book'/>
+                                <p className='book-name'>{book.volumeInfo.title}</p>
+                            </div>
+                        )
+                    })}
+                    
+                    
                 </div>
             </div>
             
