@@ -25,25 +25,30 @@ function Header(props){
         </header>
     )
 }
-
-
-
-
-function InicialPage(props){
-    const [selfHelpBooks, setSelfHelpBooks] = useState();
+function GetGoogleBooks(category, maxResults){
+    const [books, setBooks] = useState([]);
     useEffect(() => {
-        async function getBooks(){
+        async function getBooks(category){
             try{
-                const books = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:economics&printType:books&maxResults=7&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
-                setSelfHelpBooks(books.data.items);
+                const books = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&printType:books&maxResults=${maxResults}&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
+                setBooks(books.data.items);
             }catch(error){
                 console.error(error)
                 alert('Failed to fetch self-help books!');
             }
             
         }
-        getBooks();
-    }, [])
+        getBooks(category, maxResults);
+    }, [category, maxResults])
+    return books;
+}
+
+
+
+function InicialPage(props){
+    const historyBooks = GetGoogleBooks('history', 7);
+    const sciFiBooks = GetGoogleBooks("science-fiction", 7);
+    const economicsBooks = GetGoogleBooks("economics", 7);
     
     return(
         <section id='inicial-section'>
@@ -71,10 +76,10 @@ function InicialPage(props){
             </div>
             
             <div className="department-top-sellers">
-                <h1 className='title'>Top Sellers in Self-Help</h1>
+                <h1 className='title'>Top Sellers in History</h1>
                 <div className="department-books">
-                    {selfHelpBooks &&
-                    selfHelpBooks.map(book => {
+                    {historyBooks &&
+                    historyBooks.map(book => {
                         return(
                             <div className="book-info">
                                 <img src={book.volumeInfo.imageLinks.thumbnail} className='book'/>
@@ -87,12 +92,28 @@ function InicialPage(props){
                 </div>
             </div>
             <div className="department-top-sellers">
-                <h1 className='title'>Top Sellers in Self-Help</h1>
+                <h1 className='title'>Top Sellers in Sci-Fi</h1>
                 <div className="department-books">
-                    {selfHelpBooks &&
-                    selfHelpBooks.map(book => {
+                    {sciFiBooks &&
+                    sciFiBooks.map(book => {
                         return(
                             <div className="book-info">
+                                <img src={book.volumeInfo.imageLinks.thumbnail} className='book'/>
+                                <p className='book-name'>{book.volumeInfo.title}</p>
+                            </div>
+                        )
+                    })}
+                    
+                    
+                </div>
+            </div>
+            <div className="department-top-sellers">
+                <h1 className='title'>Top Sellers in Economics</h1>
+                <div className="department-books">
+                    {economicsBooks &&
+                    economicsBooks.map((book, index) => {
+                        return(
+                            <div key={index} className="book-info">
                                 <img src={book.volumeInfo.imageLinks.thumbnail} className='book'/>
                                 <p className='book-name'>{book.volumeInfo.title}</p>
                             </div>
@@ -107,12 +128,47 @@ function InicialPage(props){
     )
 }
 
+function Footer(props){
+    return(
+        <footer id='footer'>
+            <p className='contact-us'>Contact Us</p>
+            <a href="#" className='send a message'>send a message</a>
+            <p className='email'>send an email for bookland@gmail.com</p>
+            <img src={bookIcon} alt="bookIcon" />
+            <p className='copy'>© 1993-2021, bookland.com</p>
+        </footer>
+    )
+}
+
+function ContactUs(props){
+    return(
+        <section id='contact-us-section'>
+            <img src={bookIcon} alt="book-icon" />
+            <div className="form">
+                <p className='send-a-message'>Send a message</p>
+                <form action="" >
+                    <label>Name</label> <br/>
+                    <input type="text" required/><br/>
+                    <label>Email</label><br/>
+                    <input type="email" required/><br/>
+                    <label>Subject</label><br/>
+                    <input type="text" required/><br/>
+                    <label>Message</label><br/>
+                    <textarea name="" id="" cols="38" rows="5" required></textarea>
+                    <input type="submit" className='submit'/>
+                </form>
+            </div>
+        </section>
+    )
+}
 
 function App() {
     return(
         <React.Fragment>
             <Header />
             <InicialPage />
+            <Footer />
+            <ContactUs />
         </React.Fragment>
     )
 }
