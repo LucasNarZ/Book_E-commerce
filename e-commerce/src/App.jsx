@@ -5,6 +5,9 @@ import iconImage from './icons/icon_image.svg'
 import React from 'react';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+
+
 
 import './css/styles.css';
 
@@ -164,12 +167,19 @@ function ContactUs(props){
 }
 
 function SignUp(props){
+const history = useHistory();
+
+    const handleSubmit = event => {
+        event.preventDefaut();
+        history.push('/');
+    }
+
     return(
         <section id='sign-up-section'>
             <img src={bookIcon} alt="book-icon" />
             <div className="form">
                 <p className='send-a-message'>Create Account</p>
-                <form action="" >
+                <form onSubmit={handleSubmit} >
                     <label>Name</label> <br/>
                     <input type="text" required/><br/>
                     <label>Email</label><br/>
@@ -205,16 +215,26 @@ function SignIn(props){
     )
 }
 
-function App() {
+function CompleteInicialPage(props){
     return(
         <React.Fragment>
             <Header />
             <InicialPage />
             <Footer />
-            <ContactUs />
-            <SignUp />
-            <SignIn />
         </React.Fragment>
+    )
+}
+
+function App() {
+    return(
+        <Router>
+            <Routes>
+                <Route path="/" element={<CompleteInicialPage />}/>
+                <Route path="/SignUp" element={<SignUp />}/>
+                <Route path="/SignIn" element={<SignIn />}/>
+                <Route path="/ContactUs" element={<ContactUs />}/>
+            </Routes>
+        </Router>
     )
 }
 
