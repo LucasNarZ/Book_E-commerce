@@ -25,6 +25,8 @@ function Header(props){
         </header>
     )
 }
+
+
 function GetGoogleBooks(category, maxResults){
     const [books, setBooks] = useState([]);
     useEffect(() => {
@@ -42,7 +44,6 @@ function GetGoogleBooks(category, maxResults){
     }, [category, maxResults])
     return books;
 }
-
 
 
 function InicialPage(props){
@@ -162,6 +163,48 @@ function ContactUs(props){
     )
 }
 
+function SignUp(props){
+    return(
+        <section id='sign-up-section'>
+            <img src={bookIcon} alt="book-icon" />
+            <div className="form">
+                <p className='send-a-message'>Create Account</p>
+                <form action="" >
+                    <label>Name</label> <br/>
+                    <input type="text" required/><br/>
+                    <label>Email</label><br/>
+                    <input type="email" required/><br/>
+                    <label>Password</label><br/>
+                    <input type="text" required/><br/>
+                    <label>Repeat Password</label><br/>
+                    <input type="text" required/>
+                    <input type="submit" className='submit' value="Create Account"/>
+                    <p className='terms'>By creating an account, you agree to bookland's <u>Conditions of Use</u> and <u>Privacy Notice</u>.</p>
+                </form>
+            </div>
+        </section>
+    )
+}
+
+function SignIn(props){
+    return(
+        <section id='sign-in-section'>
+        <img src={bookIcon} alt="book-icon" />
+        <div className="form">
+            <p className='send-a-message'>Login</p>
+            <form action="" >
+                <label>Email</label><br/>
+                <input type="email" required/><br/>
+                <label>Password</label><br/>
+                <input type="text" required/><br/>
+                <input type="submit" className='submit' value="Login"/>
+                <p className='terms'>By loging, you agree to bookland's <u>Conditions of Use</u> and <u>Privacy Notice</u>.</p>
+            </form>
+        </div>
+    </section> 
+    )
+}
+
 function App() {
     return(
         <React.Fragment>
@@ -169,6 +212,8 @@ function App() {
             <InicialPage />
             <Footer />
             <ContactUs />
+            <SignUp />
+            <SignIn />
         </React.Fragment>
     )
 }

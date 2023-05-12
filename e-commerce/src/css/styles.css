@@ -140,7 +140,7 @@
   color: white;
 }
 
-#contact-us-section {
+#contact-us-section, #sign-up-section, #sign-in-section {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -148,33 +148,47 @@
   row-gap: 30px;
   align-items: center;
 }
-#contact-us-section .form {
+#contact-us-section .form, #sign-up-section .form, #sign-in-section .form {
   border: 1px solid black;
   border-radius: 30px;
   width: 300px;
   height: 440px;
   padding-left: 20px;
 }
-#contact-us-section .form .send-a-message {
+#contact-us-section .form .send-a-message, #sign-up-section .form .send-a-message, #sign-in-section .form .send-a-message {
   font-size: 20px;
   margin: 20px 0;
 }
-#contact-us-section .form .submit {
+#contact-us-section .form .submit, #sign-up-section .form .submit, #sign-in-section .form .submit {
   margin-top: 10px;
+  background-color: #0038FF;
+  color: white;
+  border-radius: 50px;
+  border: none;
 }
-#contact-us-section input, #contact-us-section textarea {
+#contact-us-section input, #contact-us-section textarea, #sign-up-section input, #sign-up-section textarea, #sign-in-section input, #sign-in-section textarea {
   border: 1px solid black;
 }
-#contact-us-section input {
+#contact-us-section input, #sign-up-section input, #sign-in-section input {
   width: 280px;
   height: 30px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 2px;
   padding-left: 5px;
 }
-#contact-us-section input:focus {
+#contact-us-section input:focus, #sign-up-section input:focus, #sign-in-section input:focus {
   outline: none;
+}
+#contact-us-section .terms, #sign-up-section .terms, #sign-in-section .terms {
+  font-size: 10px;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#sign-in-section .form {
+  height: 280px;
 }
 
 /*# sourceMappingURL=styles.css.map */
