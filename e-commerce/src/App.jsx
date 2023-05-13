@@ -6,11 +6,14 @@ import React from 'react';
 import axios from 'axios';
 import {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 
 
 import './css/styles.css';
 
+
+let logged = false;
 
 function Header(props){
     return(
@@ -21,8 +24,8 @@ function Header(props){
                 <img src={iconSearch} alt="icon" className='search-btn'/>
             </div>
             <div className="btns">
-                <a href="#" className='sign-in-link'>Sign In</a>
-                <button className='sign-up-btn'>Sign Up</button>
+                { !logged && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
+                {!logged && <button className='sign-up-btn'>Sign Up</button>}
             </div>
             
         </header>
@@ -136,7 +139,7 @@ function Footer(props){
     return(
         <footer id='footer'>
             <p className='contact-us'>Contact Us</p>
-            <a href="#" className='send a message'>send a message</a>
+            <a href="/ContactUs" className='send a message'>send a message</a>
             <p className='email'>send an email for bookland@gmail.com</p>
             <img src={bookIcon} alt="bookIcon" />
             <p className='copy'>© 1993-2021, bookland.com</p>
@@ -145,12 +148,18 @@ function Footer(props){
 }
 
 function ContactUs(props){
+    const cNavigate = useNavigate();
+
+    const handleSubmit = event => {
+        cNavigate('/');
+    }
+
     return(
         <section id='contact-us-section'>
             <img src={bookIcon} alt="book-icon" />
             <div className="form">
                 <p className='send-a-message'>Send a message</p>
-                <form action="" >
+                <form onSubmit={handleSubmit}>
                     <label>Name</label> <br/>
                     <input type="text" required/><br/>
                     <label>Email</label><br/>
@@ -167,11 +176,11 @@ function ContactUs(props){
 }
 
 function SignUp(props){
-const history = useHistory();
+const sNavigate = useNavigate();
 
     const handleSubmit = event => {
-        event.preventDefaut();
-        history.push('/');
+        logged = true;
+        sNavigate('/');
     }
 
     return(
@@ -197,12 +206,20 @@ const history = useHistory();
 }
 
 function SignIn(props){
+    const siNavigate = useNavigate();
+
+    const handleSubmit = event => {
+        logged = true;
+        siNavigate('/');
+    }
+
+
     return(
         <section id='sign-in-section'>
         <img src={bookIcon} alt="book-icon" />
         <div className="form">
             <p className='send-a-message'>Login</p>
-            <form action="" >
+            <form onSubmit={handleSubmit}>
                 <label>Email</label><br/>
                 <input type="email" required/><br/>
                 <label>Password</label><br/>
