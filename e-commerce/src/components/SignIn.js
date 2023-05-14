@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import bookIcon from '../icons/icon_book.svg'
+import bookIcon from '../icons/icon_book.svg';
 
-import { logged } from './auth'
+import { setLogged } from './auth';
 
 export const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -15,9 +15,10 @@ export const SignIn = () => {
         event.preventDefault();
         try{
             const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-            alert(`login realised with success, Wealcome ${userCredentials.displayName}`)
-            Navigate('/')
-            logged = true;
+            console.log(userCredentials)
+            alert(`login realised with success, Wellcome ${userCredentials._tokenResponse.displayName}`);
+            Navigate('/');
+            setLogged(true);
 
         }catch(err){
             alert(err)

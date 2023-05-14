@@ -2,9 +2,19 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import bookIcon from '../icons/icon_book.svg'
+import bookIcon from '../icons/icon_book.svg';
 
-export let logged = false;
+let logged = false;
+
+export const setLogged = (value) => {
+    logged = value;
+}
+  
+
+export const getLogged = () => {
+    return logged;
+}
+
 
 export const Auth = () => {
     const siNavigate = useNavigate();
@@ -20,17 +30,17 @@ export const Auth = () => {
             await updateProfile(user , {
                 displayName: Name
             })
-            logged = true;
+            logged.set(true);
             siNavigate('/');
             
         }catch(err){
             if(err.code == 'auth/weak-password'){
-                alert('Password too weak, password should be at least 6 characters')
+                alert('Password too weak, password should be at least 6 characters');
             }if(err.code == 'auth/invalid-email'){
-                alert('Invalid Email')
+                alert('Invalid Email');
             }else{
-                alert('Error! Try again later')
-                console.error(err)
+                alert('Error! Try again later');
+                console.error(err);
             }
         }
         

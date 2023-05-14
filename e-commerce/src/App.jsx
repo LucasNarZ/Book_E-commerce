@@ -8,13 +8,10 @@ import {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 
-import { Auth } from './components/auth.js'
+import { Auth, getLogged, setLogged} from './components/auth.js'
 import { SignIn } from './components/SignIn.js'
 
 import './css/styles.css';
-
-
-import { logged } from './components/auth'
 
 
 function Header(props){
@@ -29,8 +26,8 @@ function Header(props){
                 <img src={iconSearch} alt="icon" className='search-btn'/>
             </div>
             <div className="btns">
-                { !logged && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
-                {!logged && <button className='sign-up-btn' onClick={() => hNavigate('/SignUp')}>Sign Up</button>}
+                { !getLogged() && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
+                {!getLogged() && <button className='sign-up-btn' onClick={() => hNavigate('/SignUp')}>Sign Up</button>}
             </div>
             
         </header>
