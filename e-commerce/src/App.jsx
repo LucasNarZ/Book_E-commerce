@@ -8,14 +8,18 @@ import {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 
-
+import { Auth } from './components/auth.js'
 
 import './css/styles.css';
 
 
-let logged = false;
+import { logged } from './components/auth'
+
 
 function Header(props){
+    const hNavigate = useNavigate();
+
+
     return(
         <header id='header'>
             <img src={bookIcon} alt="icon" className='book-icon'/>
@@ -25,7 +29,7 @@ function Header(props){
             </div>
             <div className="btns">
                 { !logged && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
-                {!logged && <button className='sign-up-btn'>Sign Up</button>}
+                {!logged && <button className='sign-up-btn' onClick={() => hNavigate('/SignUp')}>Sign Up</button>}
             </div>
             
         </header>
@@ -175,35 +179,7 @@ function ContactUs(props){
     )
 }
 
-function SignUp(props){
-const sNavigate = useNavigate();
 
-    const handleSubmit = event => {
-        logged = true;
-        sNavigate('/');
-    }
-
-    return(
-        <section id='sign-up-section'>
-            <img src={bookIcon} alt="book-icon" />
-            <div className="form">
-                <p className='send-a-message'>Create Account</p>
-                <form onSubmit={handleSubmit} >
-                    <label>Name</label> <br/>
-                    <input type="text" required/><br/>
-                    <label>Email</label><br/>
-                    <input type="email" required/><br/>
-                    <label>Password</label><br/>
-                    <input type="text" required/><br/>
-                    <label>Repeat Password</label><br/>
-                    <input type="text" required/>
-                    <input type="submit" className='submit' value="Create Account"/>
-                    <p className='terms'>By creating an account, you agree to bookland's <u>Conditions of Use</u> and <u>Privacy Notice</u>.</p>
-                </form>
-            </div>
-        </section>
-    )
-}
 
 function SignIn(props){
     const siNavigate = useNavigate();
@@ -247,7 +223,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<CompleteInicialPage />}/>
-                <Route path="/SignUp" element={<SignUp />}/>
+                <Route path="/SignUp" element={<Auth />}/>
                 <Route path="/SignIn" element={<SignIn />}/>
                 <Route path="/ContactUs" element={<ContactUs />}/>
             </Routes>
