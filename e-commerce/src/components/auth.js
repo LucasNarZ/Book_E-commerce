@@ -13,14 +13,27 @@ export const Auth = () => {
     const [Name, setName] = useState("");
 
     const SignEmailPassword = async event => {
+        event.preventDefault();
         try{
-            await createUserWithEmailAndPassword(auth, email, password)
+            const userInfo = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userInfo.user;
+            await updateProfile(user , {
+                displayName: Name
+            })
+            logged = true;
+            siNavigate('/');
             
         }catch(err){
-            console.error(err)
+            if(err.code == 'auth/weak-password'){
+                alert('Password too weak, password should be at least 6 characters')
+            }if(err.code == 'auth/invalid-email'){
+                alert('Invalid Email')
+            }else{
+                alert('Error! Try again later')
+                console.error(err)
+            }
         }
-        logged = true;
-        siNavigate('/');
+        
     }
 
 
@@ -35,9 +48,9 @@ export const Auth = () => {
                     <label>Email</label><br/>
                     <input type="email" required onChange={(e) => setEmail(e.target.value)}/><br/>
                     <label>Password</label><br/>
-                    <input type="text" required onChange={(e) => setPassword(e.target.value)}/><br/>
+                    <input type="password" required onChange={(e) => setPassword(e.target.value)}/><br/>
                     <label>Repeat Password</label><br/>
-                    <input type="text" required/>
+                    <input type="password" required/>
                     <input type="submit" className='submit' value="Create Account"/>
                     <p className='terms'>By creating an account, you agree to bookland's <u>Conditions of Use</u> and <u>Privacy Notice</u>.</p>
                 </form>
