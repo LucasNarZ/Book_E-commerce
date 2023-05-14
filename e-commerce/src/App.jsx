@@ -9,6 +9,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 
 import { Auth } from './components/auth.js'
+import { SignIn } from './components/SignIn.js'
 
 import './css/styles.css';
 
@@ -181,32 +182,7 @@ function ContactUs(props){
 
 
 
-function SignIn(props){
-    const siNavigate = useNavigate();
 
-    const handleSubmit = event => {
-        logged = true;
-        siNavigate('/');
-    }
-
-
-    return(
-        <section id='sign-in-section'>
-        <img src={bookIcon} alt="book-icon" />
-        <div className="form">
-            <p className='send-a-message'>Login</p>
-            <form onSubmit={handleSubmit}>
-                <label>Email</label><br/>
-                <input type="email" required/><br/>
-                <label>Password</label><br/>
-                <input type="text" required/><br/>
-                <input type="submit" className='submit' value="Login"/>
-                <p className='terms'>By loging, you agree to bookland's <u>Conditions of Use</u> and <u>Privacy Notice</u>.</p>
-            </form>
-        </div>
-    </section> 
-    )
-}
 
 function CompleteInicialPage(props){
     return(
