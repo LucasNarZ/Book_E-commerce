@@ -4,7 +4,10 @@ import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import bookIcon from '../icons/icon_book.svg';
 
-import { setLogged } from './auth';
+import { setLogged, setUser, getUser } from './auth';
+
+
+export let user; 
 
 export const SignIn = () => {
     const [email, setEmail] = useState("");
@@ -15,16 +18,17 @@ export const SignIn = () => {
         event.preventDefault();
         try{
             const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-            console.log(userCredentials)
-            alert(`login realised with success, Wellcome ${userCredentials._tokenResponse.displayName}`);
+            alert(`login realised with success, Welcome ${userCredentials._tokenResponse.displayName}`);
+            setUser(userCredentials._tokenResponse);
             Navigate('/');
             setLogged(true);
 
         }catch(err){
             alert(err)
         }
+        
     }
-
+    
     return(
         <section id='sign-in-section'>
         <img src={bookIcon} alt="book-icon" />
@@ -42,3 +46,4 @@ export const SignIn = () => {
     </section> 
     )
 }
+

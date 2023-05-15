@@ -58,6 +58,13 @@
   font-size: 16px;
   margin-left: 15px;
 }
+#header .btn-logged {
+  display: flex;
+  align-items: center;
+}
+#header .btn-logged p {
+  margin-right: 10px;
+}
 
 #inicial-section {
   display: flex;

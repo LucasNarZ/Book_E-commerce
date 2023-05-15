@@ -1,6 +1,7 @@
 import bookIcon from './icons/icon_book.svg'
 import iconSearch from './icons/icon_search_.svg'
 import iconImage from './icons/icon_image.svg'
+import userIcon from './icons/icon_user.svg'
 
 import React from 'react';
 import axios from 'axios';
@@ -8,8 +9,9 @@ import {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 
-import { Auth, getLogged, setLogged} from './components/auth.js'
+import { Auth, getLogged, setLogged, getUser, setUser} from './components/auth.js'
 import { SignIn } from './components/SignIn.js'
+
 
 import './css/styles.css';
 
@@ -25,9 +27,11 @@ function Header(props){
                 <input type="text" placeholder="Search a book..."className='search-bar'/>
                 <img src={iconSearch} alt="icon" className='search-btn'/>
             </div>
-            <div className="btns">
+            <div className={`btns ${!getLogged() ? "btns-not-logged" : "btn-logged"}`}>
                 { !getLogged() && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
                 {!getLogged() && <button className='sign-up-btn' onClick={() => hNavigate('/SignUp')}>Sign Up</button>}
+                {getLogged() && <p>{getUser().displayName}</p>}
+                {getLogged() && <img src={userIcon} style={{width:30 + "px"}}alt='user'/>}
             </div>
             
         </header>
@@ -153,6 +157,7 @@ function ContactUs(props){
     const cNavigate = useNavigate();
 
     const handleSubmit = event => {
+        alert("message send with success")
         cNavigate('/');
     }
 

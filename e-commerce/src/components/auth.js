@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import bookIcon from '../icons/icon_book.svg';
 
 let logged = false;
+let user;
 
 export const setLogged = (value) => {
     logged = value;
@@ -15,6 +16,14 @@ export const getLogged = () => {
     return logged;
 }
 
+export const setUser= (value) => {
+    user = value;
+}
+  
+
+export const getUser = () => {
+    return user;
+}
 
 export const Auth = () => {
     const siNavigate = useNavigate();
@@ -30,7 +39,9 @@ export const Auth = () => {
             await updateProfile(user , {
                 displayName: Name
             })
-            logged.set(true);
+            console.log(userInfo);
+            setLogged(true);
+            setUser(userInfo.user);
             siNavigate('/');
             
         }catch(err){
@@ -68,3 +79,4 @@ export const Auth = () => {
         </section>
     )
 }
+
