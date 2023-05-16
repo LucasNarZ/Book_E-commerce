@@ -2,6 +2,8 @@ import bookIcon from './icons/icon_book.svg'
 import iconSearch from './icons/icon_search_.svg'
 import iconImage from './icons/icon_image.svg'
 import userIcon from './icons/icon_user.svg'
+import iconStar from './icons/icon_star.svg'
+import iconStarYellow from './icons/icon_star_yellow.svg'
 
 import React from 'react';
 import axios from 'axios';
@@ -57,6 +59,27 @@ function GetGoogleBooks(category, maxResults){
     return books;
 }
 
+function BookCategories() {
+    const [categories, setCategories] = useState([]);
+  
+    useEffect(() => {
+      axios.get('https://www.googleapis.com/books/v1/volumes?fields=items(categories)&maxResults=1&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8')
+        .then(response => {
+          const categoriesArray = response.data.items[0].volumeInfo.categories;
+          setCategories(categoriesArray);
+        })
+        .catch(error => console.log(error));
+    }, []);
+  
+    return (
+      <div>
+        {categories.map(category => (
+          <p key={category}>{category}</p>
+        ))}
+      </div>
+    );
+  }
+  
 
 function InicialPage(props){
     const historyBooks = GetGoogleBooks('history', 7);
@@ -183,7 +206,64 @@ function ContactUs(props){
 }
 
 
+function Products(props){
+    return(
+        <React.Fragment>
+            <Header />
+            <section id='products-filters'>
+                <div className="filters">
+                    <div className="rating">
+                        <p>Minimun costumer rating</p>
+                        <div className="rating-1">
+                            <img src={iconStarYellow} alt="star"  className='star'/>
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                        </div>
+                        <div className="rating-1">
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStarYellow} alt="star"  className='star'/>
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                        </div>
+                        <div className="rating-1">
+                            <img src={iconStarYellow} alt="star" className='star'/>
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                        </div>
+                        <div className="rating-1">
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStarYellow} alt="star" className='star' />
+                            <img src={iconStar} alt="star" className='star' />
+                        </div>
+                    </div>
+                    <div className="price">
+                        <p>price</p>
+                        <label>Min:</label>
+                        <input type="text" />
+                        <label>Max:</label>
+                        <input type="text" />
+                    </div>
+                    <div className="departments">
+                        <BookCategories />
 
+                        
+                    </div>
+                </div>
+                <div className="products">
+
+                </div>
+            </section>
+        </React.Fragment>
+        
+    )
+}
 
 
 function CompleteInicialPage(props){
@@ -204,6 +284,7 @@ function App() {
                 <Route path="/SignUp" element={<Auth />}/>
                 <Route path="/SignIn" element={<SignIn />}/>
                 <Route path="/ContactUs" element={<ContactUs />}/>
+                <Route path="/products" element={<Products />}/>
             </Routes>
         </Router>
     )

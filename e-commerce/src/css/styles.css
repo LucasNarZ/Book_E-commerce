@@ -198,4 +198,23 @@
   height: 280px;
 }
 
+#products-filters {
+  height: 100vh;
+  padding-top: 69px;
+}
+#products-filters .filters {
+  width: 200px;
+}
+#products-filters .filters:nth-child(1) {
+  font-size: 13px;
+}
+#products-filters .filters .star {
+  width: 20px;
+}
+#products-filters .filters .price input {
+  width: 30px;
+  border: 1px solid black;
+  margin: 0 5px;
+}
+
 /*# sourceMappingURL=styles.css.map */

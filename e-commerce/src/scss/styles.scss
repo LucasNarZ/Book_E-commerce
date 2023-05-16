@@ -217,3 +217,27 @@ $submit-btn-color: #0038FF;
     }
     
 }
+
+#products-filters{
+    height: 100vh;
+    padding-top: 69px;
+    .filters{
+        width: 200px;
+        &:nth-child(1){
+            font-size: 13px;
+        }
+        .star{
+            width: 20px;
+        }
+        .price{
+            input{
+                width: 30px;
+                border: 1px solid black;
+                margin: 0 5px;
+            }
+        }
+    }
+    .products{
+
+    }
+}
