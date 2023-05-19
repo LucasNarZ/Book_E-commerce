@@ -223,6 +223,7 @@ $submit-btn-color: #0038FF;
     padding-top: 69px;
     .filters{
         width: 200px;
+        padding-left: 20px;
         &:nth-child(1){
             font-size: 13px;
         }
@@ -235,6 +236,10 @@ $submit-btn-color: #0038FF;
                 border: 1px solid black;
                 margin: 0 5px;
             }
+        }
+        .category{
+            margin-left: 20px;
+            list-style-type: none;
         }
     }
     .products{

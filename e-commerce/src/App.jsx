@@ -58,28 +58,53 @@ function GetGoogleBooks(category, maxResults){
     }, [category, maxResults])
     return books;
 }
-
-function BookCategories() {
-    const [categories, setCategories] = useState([]);
+const CategoriasLivros = ({ setCategory }) => {
+    const [categorias, setCategorias] = useState(["Fiction",
+    "History",
+    "Science",
+    "Technology",
+    "Travel",
+    "Biography+%26+Autobiography",
+    "Business+%26+Economics",
+    "Health+%26+Fitness",
+    "Art",
+    "Cooking",
+    "Education",
+    "Philosophy",
+    "Religion",
+    "Sports+%26+Recreation",
+    "Poetry",
+    "Music",
+    "Drama",
+    "Comics+%26+Graphic+Novels",
+    "Science+Fiction",
+    "Self-Help"]);
   
-    useEffect(() => {
-      axios.get('https://www.googleapis.com/books/v1/volumes?fields=items(categories)&maxResults=1&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8')
-        .then(response => {
-          const categoriesArray = response.data.items[0].volumeInfo.categories;
-          setCategories(categoriesArray);
-        })
-        .catch(error => console.log(error));
-    }, []);
-  
+    
     return (
       <div>
-        {categories.map(category => (
-          <p key={category}>{category}</p>
-        ))}
+        <ul>
+          {categorias.map((categoria) => (
+            <li key={categoria} className='category' onClick={() => setCategory(categoria)}>{categoria}</li>
+          ))}
+        </ul>
       </div>
     );
-  }
-  
+}
+function Book(props){
+    return(
+        <div className='book'>
+            <img src={props.image} alt="bookImage" />
+            <h1>{props.title}</h1>
+            <div className="book-rating">
+
+            </div>
+            <p>{props.price}</p>
+            <button>Add to Cart</button>
+        </div>
+    )
+}
+
 
 function InicialPage(props){
     const historyBooks = GetGoogleBooks('history', 7);
@@ -207,6 +232,12 @@ function ContactUs(props){
 
 
 function Products(props){
+    const [category, setCategory] = useState('self-help')
+
+    const changeCategory = (category) => {
+        setCategory(category)
+    }
+
     return(
         <React.Fragment>
             <Header />
@@ -251,13 +282,19 @@ function Products(props){
                         <input type="text" />
                     </div>
                     <div className="departments">
-                        <BookCategories />
+                        <p>Departaments</p>
+                        <CategoriasLivros />
 
                         
                     </div>
                 </div>
                 <div className="products">
-
+                    {console.log(category)}
+                    {GetGoogleBooks(category, 40).map(book => {
+                        return(
+                            <Book image={book.volumeInfo.imageLinks.thumbnail} title={book.volumeInfo.title} price={book.saleInfo.listPrice} setCategory={changeCategory}/>
+                        )
+                    })}
                 </div>
             </section>
         </React.Fragment>

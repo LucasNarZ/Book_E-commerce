@@ -204,6 +204,7 @@
 }
 #products-filters .filters {
   width: 200px;
+  padding-left: 20px;
 }
 #products-filters .filters:nth-child(1) {
   font-size: 13px;
@@ -215,6 +216,10 @@
   width: 30px;
   border: 1px solid black;
   margin: 0 5px;
+}
+#products-filters .filters .category {
+  margin-left: 20px;
+  list-style-type: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
