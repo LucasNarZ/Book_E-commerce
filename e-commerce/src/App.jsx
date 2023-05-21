@@ -58,34 +58,35 @@ function GetGoogleBooks(category, maxResults){
     }, [category, maxResults])
     return books;
 }
-const CategoriasLivros = ({ setCategory }) => {
-    const [categorias, setCategorias] = useState(["Fiction",
-    "History",
-    "Science",
-    "Technology",
-    "Travel",
-    "Biography+%26+Autobiography",
-    "Business+%26+Economics",
-    "Health+%26+Fitness",
-    "Art",
-    "Cooking",
-    "Education",
-    "Philosophy",
-    "Religion",
-    "Sports+%26+Recreation",
-    "Poetry",
-    "Music",
-    "Drama",
-    "Comics+%26+Graphic+Novels",
-    "Science+Fiction",
-    "Self-Help"]);
+const CategoriasLivros = ({ changeCategory }) => {
+    const [categorias, setCategorias] = useState({ 
+    "Fiction":"Fiction",
+    "History":"History",
+    "Science":"Science",
+    "Technology":"Technology",
+    "Travel":"Travel",
+    "Biography Autobiography":"Biography+%26+Autobiography",
+    "Business Economics":"Business+%26+Economics",
+    "Health Fitness":"Health+%26+Fitness",
+    "Art":"Art",
+    "Cooking":"Cooking",
+    "Education":"Education",
+    "Philosophy":"Philosophy",
+    "Religion":"Religion",
+    "Sports Recreation":"Sports+%26+Recreation",
+    "Poetry":"Poetry",
+    "Music":"Music",
+    "Drama":"Drama",
+    "Comics Graghic Novels":"Comics+%26+Graphic+Novels",
+    "Science Fiction":"Science+Fiction",
+    "Self-Help":"Self-Help"});
   
     
     return (
       <div>
-        <ul>
-          {categorias.map((categoria) => (
-            <li key={categoria} className='category' onClick={() => setCategory(categoria)}>{categoria}</li>
+        <ul> 
+          {Object.entries(categorias).map(([showCategory, category]) => (
+            <li key={showCategory} className='category' onClick={() => changeCategory(category)}>{showCategory}</li>
           ))}
         </ul>
       </div>
@@ -118,7 +119,7 @@ function InicialPage(props){
                     <img src= {iconImage} alt="book" className='book'/>
                     <p className='department-name'>Fantasy</p>
                 </div>
-                <div className="book-department">
+                <div className="book-department" onClick={() => props.changeCategory}>
                     <img src= {iconImage} alt="book" className='book'/>
                     <p className='department-name'>Economics</p>
                 </div>
@@ -283,16 +284,17 @@ function Products(props){
                     </div>
                     <div className="departments">
                         <p>Departaments</p>
-                        <CategoriasLivros />
-
-                        
+                        <CategoriasLivros changeCategory={changeCategory}/>
                     </div>
                 </div>
                 <div className="products">
                     {console.log(category)}
-                    {GetGoogleBooks(category, 40).map(book => {
+                    {GetGoogleBooks(category, 40).filter((book) => {
+                        if(book.saleInfo.saleability == "FOR_SALE"){
+                            return book
+                        }}).map((book, index) => {
                         return(
-                            <Book image={book.volumeInfo.imageLinks.thumbnail} title={book.volumeInfo.title} price={book.saleInfo.listPrice} setCategory={changeCategory}/>
+                            <Book key={index} image={book?.volumeInfo?.imageLinks?.thumbnail} title={book.volumeInfo.title} price={book?.saleInfo?.listPrice?.amount} />
                         )
                     })}
                 </div>

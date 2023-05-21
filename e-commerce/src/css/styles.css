@@ -220,6 +220,7 @@
 #products-filters .filters .category {
   margin-left: 20px;
   list-style-type: none;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */
