@@ -17,17 +17,22 @@ import { SignIn } from './components/SignIn.js'
 
 import './css/styles.css';
 
+let search;
 
-function Header(props){
+function Header({ isInProducts = false, changeCategory }){
     const hNavigate = useNavigate();
+    const [Search, setSearch] = useState('');
 
 
     return(
         <header id='header'>
             <img src={bookIcon} alt="icon" className='book-icon'/>
             <div className="search">
-                <input type="text" placeholder="Search a book..."className='search-bar'/>
-                <img src={iconSearch} alt="icon" className='search-btn'/>
+                <input type="text" placeholder="Search a book..."className='search-bar' onChange={(e) => {search = e.currentTarget.value;setSearch(e.currentTarget.value)}}/>
+                <img src={iconSearch} alt="icon" className='search-btn' onClick={()  => {
+                    hNavigate('/products');
+                    if(isInProducts){changeCategory(Search)}
+                }}/>
             </div>
             <div className={`btns ${!getLogged() ? "btns-not-logged" : "btn-logged"}`}>
                 { !getLogged() && <a href="/SignIn" className='sign-in-link'>Sign In</a>}
@@ -46,7 +51,7 @@ function GetGoogleBooks(category, maxResults){
     useEffect(() => {
         async function getBooks(category){
             try{
-                const books = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${category}&printType:books&maxResults=${maxResults}&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
+                const books = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${category}&printType:books&filter=paid-ebooks&maxResults=${maxResults}&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
                 setBooks(books.data.items);
             }catch(error){
                 console.error(error)
@@ -97,11 +102,10 @@ function Book(props){
         <div className='book'>
             <img src={props.image} alt="bookImage" />
             <h1>{props.title}</h1>
-            <div className="book-rating">
-
-            </div>
-            <p>{props.price}</p>
-            <button>Add to Cart</button>
+            <p>{props.author}</p>
+            <div className="book-rating">{props.rating}</div>
+            <p>{"$" + props.price}</p>
+            <button className='addToCart'>Add to Cart</button>
         </div>
     )
 }
@@ -233,7 +237,7 @@ function ContactUs(props){
 
 
 function Products(props){
-    const [category, setCategory] = useState('self-help')
+    const [category, setCategory] = useState(search)
 
     const changeCategory = (category) => {
         setCategory(category)
@@ -241,7 +245,7 @@ function Products(props){
 
     return(
         <React.Fragment>
-            <Header />
+            <Header changeCategory={changeCategory} isInProducts={true}/>
             <section id='products-filters'>
                 <div className="filters">
                     <div className="rating">
@@ -288,13 +292,16 @@ function Products(props){
                     </div>
                 </div>
                 <div className="products">
-                    {console.log(category)}
-                    {GetGoogleBooks(category, 40).filter((book) => {
-                        if(book.saleInfo.saleability == "FOR_SALE"){
-                            return book
-                        }}).map((book, index) => {
+                    {GetGoogleBooks(category, 40)?.map((book, index) => {
+                        const price = book?.saleInfo?.listPrice?.amount / 5;
+                        const bookImage = book?.volumeInfo?.imageLinks?.thumbnail;
+                        const bookTitle = book.volumeInfo.title;
+                        const bookRating = book?.volumeInfo?.avarageRating;
+                        const bookAuthor = book?.volumeInfo?.authors?.slice(0, 2)?.join(' ');
+                        //const language = 
                         return(
-                            <Book key={index} image={book?.volumeInfo?.imageLinks?.thumbnail} title={book.volumeInfo.title} price={book?.saleInfo?.listPrice?.amount} />
+                            <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor}/>
+
                         )
                     })}
                 </div>

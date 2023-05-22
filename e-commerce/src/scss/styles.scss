@@ -221,6 +221,7 @@ $submit-btn-color: #0038FF;
 #products-filters{
     height: 100vh;
     padding-top: 69px;
+    display: flex;
     .filters{
         width: 200px;
         padding-left: 20px;
@@ -244,6 +245,38 @@ $submit-btn-color: #0038FF;
         }
     }
     .products{
-
+        width: 100%;
+        margin-left: 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        .book{
+            border: 1px solid rgb(124, 124, 124);
+            width: 250px;
+            row-gap: 5px;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            h1{
+                font-size: 16px;
+            }
+            img{
+                height: 400px;
+            }
+        }
+        .addToCart{
+            width: 100px;
+            height: 35px;
+            border-radius: 50px;
+            background-color: rgb(49, 255, 49);
+            position: absolute;
+            bottom: 15px;
+        }
     }
+}
+
+.search-btn, .sign-up-btn, .book, .star, .submit{
+    cursor: pointer;
 }
