@@ -239,6 +239,14 @@ function ContactUs(props){
 function Products(props){
     const [category, setCategory] = useState(search)
 
+    useEffect(() => {
+        localStorage.setItem('category', category);
+    }, [category]);
+    useEffect(() => {
+        const saveCategory = localStorage.getItem('category');
+        if(saveCategory)setCategory(saveCategory)
+
+    }, [])
     const changeCategory = (category) => {
         setCategory(category)
     }
@@ -292,13 +300,13 @@ function Products(props){
                     </div>
                 </div>
                 <div className="products">
+                    {console.log(category)}
                     {GetGoogleBooks(category, 40)?.map((book, index) => {
                         const price = book?.saleInfo?.listPrice?.amount / 5;
                         const bookImage = book?.volumeInfo?.imageLinks?.thumbnail;
                         const bookTitle = book.volumeInfo.title;
-                        const bookRating = book?.volumeInfo?.avarageRating;
+                        const bookRating = (Math.random() * 4 + 1).toFixed(1)
                         const bookAuthor = book?.volumeInfo?.authors?.slice(0, 2)?.join(' ');
-                        //const language = 
                         return(
                             <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor}/>
 
