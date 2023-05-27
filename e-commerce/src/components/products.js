@@ -4,9 +4,9 @@ import iconStarYellow from '../icons/icon_star_yellow.svg'
 import React from 'react';
 import {useState, useEffect} from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
 
-import { connect } from 'react-redux';
-import { changeCategory } from '../reducer';
+
 
 import '../css/styles.css';
 
@@ -15,9 +15,8 @@ import { GetGoogleBooks } from '../functions/getGoogleBooks.js'
 import { Categorys } from './categorys.js'
 import { Book } from './book.js'
 
-export function Products({ Category }){
-    const [category, setCategory] = useState(Category)
-
+export function Products( ){
+    const category = useSelector(state => state.category.Category);
 
     return(
         <React.Fragment>
@@ -64,7 +63,7 @@ export function Products({ Category }){
                     </div>
                     <div className="departments">
                         <p>Departaments</p>
-                        <Categorys changeCategory={changeCategory}/>
+                        <Categorys />
                     </div>
                 </div>
                 <div className="products">
@@ -74,8 +73,9 @@ export function Products({ Category }){
                         const bookTitle = book.volumeInfo.title;
                         const bookRating = (Math.random() * 4 + 1).toFixed(1)
                         const bookAuthor = book?.volumeInfo?.authors?.slice(0, 2)?.join(' ');
+                        const bookId = book?.id;
                         return(
-                            <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor}/>
+                            <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor} bookId={bookId}/>
 
                         )
                     })}

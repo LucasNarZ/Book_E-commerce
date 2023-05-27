@@ -9,13 +9,15 @@ import {useNavigate} from 'react-router-dom';
 import { Auth, getLogged, setLogged, getUser, setUser} from './auth.js'
 import { SignIn } from './SignIn.js'
 
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { changeCategory } from '../reducer';
 
 import '../css/styles.css';
 
-export function Header({ changeCategory }){
+export function Header(props){
     const hNavigate = useNavigate();
+    const dispatch = useDispatch();
     const [Search, setSearch] = useState('');
 
 
@@ -26,6 +28,8 @@ export function Header({ changeCategory }){
                 <input type="text" placeholder="Search a book..."className='search-bar' onChange={(e) => {setSearch(e.currentTarget.value)}}/>
                 <img src={iconSearch} alt="icon" className='search-btn' onClick={()  => {
                     hNavigate('/products');
+                    console.log("ddddddddddddddddd")
+                    dispatch(changeCategory(Search))
                 }}/>
             </div>
             <div className={`btns ${!getLogged() ? "btns-not-logged" : "btn-logged"}`}>

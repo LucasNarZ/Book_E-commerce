@@ -12,7 +12,7 @@ import './css/styles.css';
 import { CompleteInicialPage } from './components/completeInicialPage.js'
 import { ContactUs } from './components/contactUs.js'
 import { Products } from './components/products.js'
-
+import { ProductPage } from './components/productPage.js'
 
 function App() {
     return(
@@ -23,6 +23,7 @@ function App() {
                 <Route path="/SignIn" element={<SignIn />}/>
                 <Route path="/ContactUs" element={<ContactUs />}/>
                 <Route path="/products" element={<Products />}/>
+                <Route path="/product" element={<ProductPage />}/>
             </Routes>
         </Router>
     )

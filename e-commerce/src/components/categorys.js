@@ -2,12 +2,13 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 
 
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { changeCategory } from '../reducer';
 
 import '../css/styles.css'
 ;
-export const Categorys = ({ changeCategory }) => {
+export const Categorys = (props) => {
+    const dispatch = useDispatch();
     const [categorias, setCategorias] = useState({ 
     "Fiction":"Fiction",
     "History":"History",
@@ -29,15 +30,15 @@ export const Categorys = ({ changeCategory }) => {
     "Comics Graghic Novels":"Comics+%26+Graphic+Novels",
     "Science Fiction":"Science+Fiction",
     "Self-Help":"Self-Help"});
-  
+
     
     return (
-      <div>
+    <div>
         <ul> 
-          {Object.entries(categorias).map(([showCategory, category]) => (
-            <li key={showCategory} className='category' onClick={() => changeCategory(category)}>{showCategory}</li>
-          ))}
+        {Object.entries(categorias).map(([showCategory, category]) => (
+            <li key={showCategory} className='category' onClick={() => dispatch(changeCategory(category))}>{showCategory}</li>
+        ))}
         </ul>
-      </div>
+    </div>
     );
 }
