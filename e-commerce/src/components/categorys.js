@@ -29,7 +29,8 @@ export const Categorys = (props) => {
     "Drama":"Drama",
     "Comics Graghic Novels":"Comics+%26+Graphic+Novels",
     "Science Fiction":"Science+Fiction",
-    "Self-Help":"Self-Help"});
+    "Self-Help":"Self-Help",
+    "Economics":'economics'});
 
     
     return (

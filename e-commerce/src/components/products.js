@@ -66,6 +66,7 @@ export function Products( ){
                         <Categorys />
                     </div>
                 </div>
+                {console.log(GetGoogleBooks(category, 40))}
                 <div className="products">
                     {GetGoogleBooks(category, 40)?.map((book, index) => {
                         const price = book?.saleInfo?.listPrice?.amount / 5;
@@ -74,8 +75,13 @@ export function Products( ){
                         const bookRating = (Math.random() * 4 + 1).toFixed(1)
                         const bookAuthor = book?.volumeInfo?.authors?.slice(0, 2)?.join(' ');
                         const bookId = book?.id;
+                        const bookDescription = book?.volumeInfo?.description;
+                        const publisher = book?.volumeInfo?.publisher;
+                        const pageCount = book?.volumeInfo?.pageCount;
+                        const Category = book?.volumeInfo?.categories[0];
+                        const bookLanguage = book?.volumeInfo?.language;
                         return(
-                            <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor} bookId={bookId}/>
+                            <Book key={index} image={bookImage} title={bookTitle} price={price.toFixed(2)} rating={bookRating} author={bookAuthor} bookId={bookId} publisher={publisher} pageCount={pageCount} category={Category} description={bookDescription} language={bookLanguage}/>
 
                         )
                     })}

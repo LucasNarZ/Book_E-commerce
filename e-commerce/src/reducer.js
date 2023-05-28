@@ -13,7 +13,7 @@ const categorySlice = createSlice({
 
 const activeBookSlice = createSlice({
     name:'activeBook',
-    initialState: {ActiveBook: ""},
+    initialState: {ActiveBook: {}},
     reducers: {
         changeActiveBook(state, action){
             state.ActiveBook = action.payload;
