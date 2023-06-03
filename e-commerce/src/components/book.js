@@ -8,6 +8,7 @@ import { useDispatch,useSelector } from 'react-redux';
 
 import '../css/styles.css';
 import { changeActiveBook } from '../reducer';
+import { addToCart } from '../reducer';
 
 export function Book(props){
     const navigate = useNavigate();
@@ -44,7 +45,15 @@ export function Book(props){
                 {props.rating}
             </div>
             <p>{"$" + props.price}</p>
-            <button className='addToCart'>Add to Cart</button>
+            <button className='addToCart' onClick={() => {
+                dispatch(addToCart({
+                    id: props.id,
+                    title: props.title,
+                    author: props.author,
+                    image:props.image,
+                    price: props.price,
+                }))
+            }}>Add to Cart</button>
         </div>
     )
 }

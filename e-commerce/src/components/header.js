@@ -28,7 +28,6 @@ export function Header(props){
                 <input type="text" placeholder="Search a book..."className='search-bar' onChange={(e) => {setSearch(e.currentTarget.value)}}/>
                 <img src={iconSearch} alt="icon" className='search-btn' onClick={()  => {
                     hNavigate('/products');
-                    console.log("ddddddddddddddddd")
                     dispatch(changeCategory(Search))
                 }}/>
             </div>
