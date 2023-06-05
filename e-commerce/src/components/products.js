@@ -97,7 +97,7 @@ export function Products( ){
                 <div className="products">
                     {
                     GetGoogleBooks(category, 40)?.filter((book) => {
-                        const bookRating = (book.volumeInfo.title.length % 5) + (book.volumeInfo.title.length % 10) / 10;
+                        const bookRating = (book.volumeInfo.title.length % 5) + (book.volumeInfo.title.length % 10) / 10;    
                         return (bookRating >  minimumRating) && (maxValue > book?.saleInfo?.listPrice?.amount / 5) && (book?.saleInfo?.listPrice?.amount / 5> minimunValue)
                     })?.map((book, index) => {
                         const price = book?.saleInfo?.listPrice?.amount / 5;

@@ -14,7 +14,6 @@ export function GetGoogleBooks(category_id, maxResults = 1, responseWith = "cate
                 if(responseWith == "id"){
                     reponse = await axios.get(`https://www.googleapis.com/books/v1/volumes/${category}&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
                 }else{
-                    console.log("b")
                     reponse = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${category}&printType:books&filter=paid-ebooks&maxResults=${maxResults}&key=AIzaSyDLjjcAVmXjDaj0OnU_sV_BTUZjLw_cbd8`);
                 }
                 setBooks(reponse.data.items);

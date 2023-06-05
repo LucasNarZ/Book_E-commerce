@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import iconStarYellow from '../icons/icon_star_yellow.svg';
 
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 import { useDispatch,useSelector } from 'react-redux';
 
@@ -13,6 +13,9 @@ import { addToCart } from '../reducer';
 export function Book(props){
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [cart, setCart] = useState(useSelector(state => state.cart))
+
+    
 
     const handleClick = () => {
         navigate('/product');
@@ -45,14 +48,19 @@ export function Book(props){
                 {props.rating}
             </div>
             <p>{"$" + props.price}</p>
-            <button className='addToCart' onClick={() => {
-                dispatch(addToCart({
-                    id: props.id,
-                    title: props.title,
-                    author: props.author,
-                    image:props.image,
-                    price: props.price,
-                }))
+            <button className='addToCart' onClick={(e) => {
+                e.stopPropagation();
+                navigate('/cart')
+                if(!cart.some(book => book.id === props.bookId)){
+                    dispatch(addToCart({
+                        id: props.bookId,
+                        title: props.title,
+                        author: props.author,
+                        image:props.image,
+                        price: props.price,
+                    }))
+                }
+                console.log(cart)
             }}>Add to Cart</button>
         </div>
     )

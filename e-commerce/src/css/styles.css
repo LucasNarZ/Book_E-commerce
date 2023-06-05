@@ -44,6 +44,8 @@
 }
 #header .btns {
   margin-right: 50px;
+  display: flex;
+  align-items: center;
 }
 #header .btns .sign-in-link {
   text-decoration: none;
@@ -58,6 +60,10 @@
   font-size: 16px;
   margin-left: 15px;
 }
+#header .btns .cart-icon {
+  margin-left: 40px;
+  width: 32px;
+}
 #header .btn-logged {
   display: flex;
   align-items: center;
@@ -66,6 +72,22 @@
   margin-right: 10px;
 }
 
+@media (max-width: 888px) {
+  #header .search .search-bar {
+    width: 40vw;
+  }
+  #header .book-icon {
+    margin-left: 5px;
+  }
+  #header .btns .cart-icon, #header .btns .sign-up-btn {
+    margin-left: 5px;
+  }
+}
+@media (max-width: 400px) {
+  #header .book-icon {
+    display: none;
+  }
+}
 #inicial-section {
   display: flex;
   flex-direction: column;
@@ -130,6 +152,16 @@
   margin-top: 5px;
 }
 
+@media (max-width: 888px) {
+  #inicial-section .book-department:nth-child(4), #inicial-section .book-department:nth-child(5) {
+    display: none;
+  }
+  #inicial-section .department-top-sellers .department-books .book-info:nth-child(5),
+  #inicial-section .department-top-sellers .department-books .book-info:nth-child(6),
+  #inicial-section .department-top-sellers .department-books .book-info:nth-child(7) {
+    display: none;
+  }
+}
 #footer {
   display: flex;
   flex-direction: column;
@@ -233,18 +265,18 @@
   border: 1px solid rgb(124, 124, 124);
   width: 250px;
   row-gap: 5px;
-  height: 600px;
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
   border-radius: 20px;
   padding: 20px;
   position: relative;
+  padding-bottom: 70px;
 }
 #products-filters .products .book h1 {
   font-size: 16px;
 }
 #products-filters .products .book .book-image {
-  height: 400px;
+  width: 200px;
+  align-self: center;
 }
 #products-filters .products .book .book-rating {
   display: flex;
@@ -259,6 +291,28 @@
   bottom: 15px;
 }
 
+@media (max-width: 1124px) {
+  #products-filters .products {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 830px) {
+  #products-filters .products {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+  }
+}
+@media (max-width: 443px) {
+  #products-filters .products .book {
+    padding: 15px 0 70px 0;
+    width: 100%;
+  }
+  #products-filters .products .book .book-image {
+    width: 160px;
+    height: 250px;
+    align-self: center;
+  }
+}
 .search-btn, .sign-up-btn, .book, .star, .submit {
   cursor: pointer;
 }
@@ -334,20 +388,26 @@
   min-height: 20px;
 }
 
-.page {
+.cart {
   display: grid;
   grid-template-columns: 75% 25%;
   background-color: #F2F2F2;
   padding-top: 70px;
+  padding-bottom: 70px;
   min-height: 100vh;
 }
-.page .products {
+.cart .products {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
   margin-left: 20px;
 }
-.page .products .product {
+.cart .products .clean-cart {
+  color: rgb(114, 220, 255);
+  align-self: flex-end;
+  cursor: pointer;
+}
+.cart .products .product {
   display: grid;
   background-color: white;
   border-radius: 50px;
@@ -355,19 +415,37 @@
   align-items: center;
   padding: 20px 0;
 }
-.page .products .product .image {
+.cart .products .product .info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 13px;
+}
+.cart .products .product .image {
   margin-left: 50px;
 }
-.page .products .product input {
+.cart .products .product input {
   border: 1px solid black;
   width: 50px;
   padding: 0 5px;
   margin-left: 10px;
 }
-.page .products .product .price {
+.cart .products .product .title {
   font-size: 20px;
 }
-.page .procced {
+.cart .products .product .author {
+  color: rgb(151, 151, 151);
+}
+.cart .products .product .stock {
+  color: #40FF3D;
+}
+.cart .products .product .remove {
+  color: rgb(114, 220, 255);
+  cursor: pointer;
+}
+.cart .products .product .price {
+  font-size: 20px;
+}
+.cart .procced {
   background-color: white;
   border-radius: 50px;
   height: 120px;
@@ -377,15 +455,22 @@
   align-items: center;
   row-gap: 20px;
 }
-.page .procced .total {
+.cart .procced .total {
   align-self: flex-start;
   margin: 30px 0 0 20px;
 }
-.page .procced button {
+.cart .procced .total .subtotal, .cart .procced .total .subtotal-value {
+  display: inline-block;
+}
+.cart .procced button {
   background-color: #40FF3D;
   border-radius: 50px;
   height: 35px;
   width: 150px;
+}
+
+button, #header .book-icon, .cart-icon {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */

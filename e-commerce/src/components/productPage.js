@@ -13,9 +13,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { addToCart } from '../reducer';
+import { useNavigate } from 'react-router-dom';
 
 export function ProductPage(props){
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const bookRating = useSelector((state) => state.active.ActiveBook.rating)
@@ -49,9 +51,19 @@ export function ProductPage(props){
                         <input type='text' className='input'/>
                         <input type='submit' className='submit' value="check"/>
                     </form>
-                    <button className='buy-now'>Buy Now</button>
-                    {console.log(useSelector((state) => state.cart))}
+                    <button className='buy-now' onClick={() => {
+                        navigate('/cart');
+                        dispatch(addToCart({
+                            id: bookId,
+                            title: bookTitle,
+                            author: bookAuthor,
+                            image: bookImage,
+                            price: bookPrice,
+                        }))
+                    }}>Buy Now</button>
+                    {console.log(useSelector((state) => state))}
                     <button className='add' onClick={() => {
+                        navigate('/cart');
                         dispatch(addToCart({
                             id: bookId,
                             title: bookTitle,

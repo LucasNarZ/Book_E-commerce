@@ -59,7 +59,6 @@ const cartSlice = createSlice({
             price: price,
             image: image
             };
-            console.log(state)
             return [...state, newObj];
         },
         removeFromCart(state, action){
@@ -68,6 +67,9 @@ const cartSlice = createSlice({
                     return book;
                 }
             })
+        },
+        cleanCart(state, action){
+            return []
         }
     }
 })
@@ -81,4 +83,4 @@ export const cartReducer = cartSlice.reducer;
 export const { changeCategory } = categorySlice.actions;
 export const { changeActiveBook } = activeBookSlice.actions;
 export const { changeOnFilter, changeMinimunRating, changeMinimunValue, changeMaxValue } = filterSlice.actions;
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, cleanCart } = cartSlice.actions;

@@ -55,6 +55,8 @@ $submit-btn-color: #0038FF;
     }
     .btns{
         margin-right: 50px;
+        display: flex;
+        align-items: center;
         .sign-in-link{
             text-decoration: none;
             color: black;
@@ -68,6 +70,10 @@ $submit-btn-color: #0038FF;
             font-size: 16px;
             margin-left: 15px;
         }
+        .cart-icon{
+            margin-left: 40px;
+            width: 32px;
+        }
     }
     .btn-logged{
         display: flex;
@@ -78,6 +84,24 @@ $submit-btn-color: #0038FF;
     }
     
 }
+
+@media(max-width: 888px){
+    #header .search .search-bar{
+        width: 40vw;
+    }
+    #header .book-icon{
+        margin-left: 5px;
+    }
+    #header .btns .cart-icon, #header .btns .sign-up-btn{
+        margin-left: 5px;
+    }
+}
+@media(max-width: 400px){
+    #header .book-icon{
+        display: none;
+    }
+}
+
 
 #inicial-section{
     display: flex;
@@ -146,6 +170,18 @@ $submit-btn-color: #0038FF;
     }
     
 }
+
+@media(max-width: 888px){
+    #inicial-section .book-department:nth-child(4), #inicial-section .book-department:nth-child(5){
+        display: none;
+    }
+    #inicial-section .department-top-sellers .department-books .book-info:nth-child(5),
+    #inicial-section .department-top-sellers .department-books .book-info:nth-child(6),
+    #inicial-section .department-top-sellers .department-books .book-info:nth-child(7){
+        display: none;
+    }
+}
+
 
 #footer{
     display: flex;
@@ -253,17 +289,17 @@ $submit-btn-color: #0038FF;
             border: 1px solid rgb(124, 124, 124);
             width: 250px;
             row-gap: 5px;
-            height: 600px;
-            display: flex;
-            flex-direction: column;
+            display: inline-block;
             border-radius: 20px;
             padding: 20px;
             position: relative;
+            padding-bottom: 70px;
             h1{
                 font-size: 16px;
             }
             .book-image{
-                height: 400px;
+                width: 200px;
+                align-self: center;
             }
             .book-rating{
                 display: flex;
@@ -278,6 +314,30 @@ $submit-btn-color: #0038FF;
             position: absolute;
             bottom: 15px;
         }
+    }
+}
+@media(max-width: 1124px){
+    #products-filters .products{
+        grid-template-columns: 1fr 1fr ;
+    }
+
+}
+@media(max-width: 830px){
+    #products-filters .products{
+        grid-template-columns: 1fr ;
+        margin-left: 0;
+    }
+
+}
+@media(max-width: 443px){
+    #products-filters .products .book{
+        padding: 15px 0 70px 0 ;
+        width: 100%;
+    }
+    #products-filters .products .book .book-image{
+        width: 160px;
+        height: 250px;
+        align-self: center;
     }
 }
 
@@ -360,17 +420,23 @@ $submit-btn-color: #0038FF;
     width: 20px;
     min-height: 20px;
 }
-.page{
+.cart{
     display: grid;
     grid-template-columns: 75% 25%;
     background-color: $inicial-page-cart-color;
     padding-top: 70px;
+    padding-bottom: 70px;
     min-height: 100vh;
     .products{
         display: flex;
         flex-direction: column;
         row-gap: 10px;
         margin-left: 20px;
+        .clean-cart{
+            color: rgb(114, 220, 255);
+            align-self: flex-end;
+            cursor: pointer;
+        }
         .product{
             display: grid;
             background-color: white;
@@ -378,6 +444,11 @@ $submit-btn-color: #0038FF;
             grid-template-columns: 25% 55% 20%;
             align-items: center;
             padding: 20px 0;
+            .info{
+                display: flex;
+                flex-direction: column;
+                row-gap: 13px;
+            }
             .image{
                 margin-left: 50px;
             }
@@ -386,6 +457,19 @@ $submit-btn-color: #0038FF;
                 width: 50px;
                 padding: 0 5px;
                 margin-left: 10px;
+            }
+            .title{
+                font-size: 20px;
+            }
+            .author{
+                color: rgb(151, 151, 151);
+            }
+            .stock{
+                color: #40FF3D;
+            }
+            .remove{
+                color: rgb(114, 220, 255);
+                cursor: pointer;
             }
             .price{
                 font-size: 20px;
@@ -404,6 +488,9 @@ $submit-btn-color: #0038FF;
         .total{
             align-self:flex-start;
             margin: 30px 0 0 20px;
+            .subtotal, .subtotal-value{
+                display: inline-block;
+            }
         }
         button{
             background-color: #40FF3D;
@@ -412,4 +499,7 @@ $submit-btn-color: #0038FF;
             width: 150px;
         }
     }
+}
+button, #header .book-icon, .cart-icon{
+    cursor: pointer;
 }
