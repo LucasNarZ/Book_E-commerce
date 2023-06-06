@@ -349,7 +349,6 @@ $submit-btn-color: #0038FF;
     padding-top: 140px;
     height: 600px;
     display: flex;
-    margin-bottom: 100px;
     .image{
         min-width: 50vw;
         display: flex;
@@ -405,6 +404,16 @@ $submit-btn-color: #0038FF;
             height: 35px;
             border-radius: 50px;
         }
+    }
+}
+
+@media(max-width: 850px){
+    #image-info{
+        flex-direction: column;
+        padding: 50px 50px;
+    }
+    .complete-info{
+        margin-top: 500px;
     }
 }
 
