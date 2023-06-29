@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/compat/auth";
 import bookIcon from '../icons/icon_book.svg';
 
 let logged = false;
