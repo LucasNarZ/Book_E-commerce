@@ -7,11 +7,41 @@ const argon2 = require('argon2');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
 const { body, validationResult } = require('express-validator');
 
+const cors = require('cors');
+
+const app = express();
+
+
+require('dotenv').config();
+
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+
+
+app.use(express.json());
+
+
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+const corsOptions = {
+    origin: 'http://localhost:3000', // Substitua pelo domínio do seu site
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
+
+
+
 async function searchUserInDB(users, userEmail, userPassword){
-    const promises = users.map(async user => {
+    const promises = users.map(async (user) => {
         return user.email === userEmail && await comparePassword(user.password, userPassword);
     })
 
@@ -79,11 +109,63 @@ router.post("/user/login", async (req, res) => {
         const { email, password } = req.body;
         const users = await prisma.User.findMany();
         const isUserRegistered = await searchUserInDB(users, email, password);
-        res.json(isUserRegistered);
+        if(isUserRegistered === false){
+            res.json(false);
+            return
+        }
+        const registeredUser = await prisma.User.findUnique({
+            where:{email:email}
+        })
+        
+        res.json(true);
     }catch(err){
         console.error(err);
     }
 })
+
+router.post("/cart", passport.authenticate('jwt', {session:false}), async (req, res) => {
+    const userId = req.cookies.userId;
+    const { idBook, title, price, imageLink, author } = req.body;
+    const cartItem = await prisma.cartItem.create({data:{
+        idBook,
+        title,
+        price,
+        author,
+        imageLink,
+        userId
+    }});
+     
+    res.json(cartItem);
+})
+
+router.get("/cart", passport.authenticate('jwt', {session:false}), async (req, res) => {
+    const userId = req.cookies.userId;
+    const { cart } = await prisma.User.findUnique({
+        where:{
+            userId,
+        }
+    })
+    res.json(cart);
+})
+
+router.delete("/cart", passport.authenticate('jwt', {session:false}), async (req, res) => {
+    const userId = req.cookies.userId;
+    await prisma.cart.delete({where:{
+        userId:userId
+    }})
+    res.json(userId);
+})
+router.delete("/car/:id", passport.authenticate('jwt', {session:false}), async (req, res) => {
+    const userId = req.cookies.userId;
+    const idBook = req.params.id;
+    const cart = await prisma.cart.delete({where:{
+        userId,
+        idBook
+    }})
+    res.json(cart);
+})
+
+
 
 
 module.exports = router;

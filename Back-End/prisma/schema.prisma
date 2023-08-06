@@ -11,8 +11,20 @@ datasource db {
 }
 
 model User {
-    id String @id @default(uuid())
-    name String
-    email String @unique
-    password String
+  id       String     @id @default(uuid())
+  name     String
+  email    String     @unique
+  password String
+  cart     CartItem[]
+}
+
+model CartItem {
+  id        String @id @default(uuid())
+  idBook    String
+  title     String
+  price     String
+  author    String
+  imageLink String
+  user      User   @relation(fields: [userId], references: [id])
+  userId    String
 }

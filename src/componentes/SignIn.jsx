@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../config/firebase';
+//import { auth } from '../config/firebase';
 import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+//import { signInWithEmailAndPassword } from 'firebase/auth';
 import bookIcon from '../icons/icon_book.svg';
 
-import { setLogged, setUser, getUser } from './auth';
+import { setLogged, setUser, getUser } from './SignUp';
 
 
 export let user; 
@@ -17,11 +17,11 @@ export const SignIn = () => {
     const handlesignIn = async event => {
         event.preventDefault();
         try{
-            const userCredentials = await signInWithEmailAndPassword(auth, email, password);
-            alert(`login realised with success, Welcome ${userCredentials._tokenResponse.displayName}`);
-            setUser(userCredentials._tokenResponse);
-            Navigate('/');
-            setLogged(true);
+            // const userCredentials = await signInWithEmailAndPassword(auth, email, password);
+            // alert(`login realised with success, Welcome ${userCredentials._tokenResponse.displayName}`);
+            // setUser(userCredentials._tokenResponse);
+            // Navigate('/');
+            // setLogged(true);
 
         }catch(err){
             alert(err)

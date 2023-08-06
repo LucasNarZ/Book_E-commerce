@@ -2,9 +2,9 @@ import React from 'react';
 
 import '../css/styles.css';
 
-import { Header } from './header.js';
-import { InicialPage } from './inicialPage.js';
-import { Footer } from './footer.js';
+import { Header } from './header.jsx';
+import { InicialPage } from './inicialPage.jsx';
+import { Footer } from './footer.jsx';
 
 export function CompleteInicialPage(props){
     return(

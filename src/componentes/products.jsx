@@ -1,5 +1,4 @@
-import iconStar from '../icons/icon_star.svg'
-import iconStarYellow from '../icons/icon_star_yellow.svg'
+
 
 import React from 'react';
 import {useState, useEffect} from 'react';
@@ -7,13 +6,15 @@ import {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeOnFilter, changeMinimunRating, changeMinimunValue, changeMaxValue } from '../reducer'
 
+import { Rating } from '@mui/material';
+
 
 import '../css/styles.css';
 
-import { Header } from './header.js'
+import { Header } from './header.jsx'
 import { GetGoogleBooks } from '../functions/getGoogleBooks.js'
-import { Categorys } from './categorys.js'
-import { Book } from './book.js'
+import { Categorys } from './categorys.jsx'
+import { Book } from './book.jsx'
 
 export function Products( ){
     const category = useSelector(state => state.category.Category);
@@ -52,32 +53,16 @@ export function Products( ){
                         <button onClick={limpar}>limpar</button>
                         <p>Minimun costumer rating</p>
                         <div className="rating-1" onClick={() => filterByRating(1)}>
-                            <img src={iconStarYellow} alt="star"  className='star'/>
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
+                            <Rating readOnly value={1}/>
                         </div>
                         <div className="rating-1" onClick={() => filterByRating(2)}>
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStarYellow} alt="star"  className='star'/>
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
+                            <Rating readOnly value={2}/>
                         </div>
                         <div className="rating-1" onClick={() => filterByRating(3)}>
-                            <img src={iconStarYellow} alt="star" className='star'/>
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
+                            <Rating readOnly value={3}/>
                         </div>
                         <div className="rating-1" onClick={() => filterByRating(4)}>
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStarYellow} alt="star" className='star' />
-                            <img src={iconStar} alt="star" className='star' />
+                            <Rating readOnly value={4}/>
                         </div>
                     </div>
                     <div className="price">
